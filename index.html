@@ -578,6 +578,11 @@ body:hover #cursor-ring{opacity:1;}
 <canvas id="aurora"></canvas>
 <canvas id="confetti-c"></canvas>
 
+<!-- ROMANTIC BACKGROUND MUSIC -->
+<audio id="romance-music" loop preload="auto">
+  <source src="romance-music.mp3" type="audio/mpeg" />
+</audio>
+
 <!-- TRANSITION OVERLAY -->
 <div id="transition-overlay">
   <p class="transition-text">Something magical awaits you...</p>
@@ -951,6 +956,16 @@ function showScreen(id) {
 }
 
 function startTransition() {
+  // Start romantic background music after the user clicks the surprise button
+  const music = document.getElementById('romance-music');
+  if (music) {
+    music.volume = 0.4;
+    music.play().catch(() => {
+      // Some browsers may block audio until another user interaction
+      console.log('Music playback was blocked by the browser.');
+    });
+  }
+
   const ov = document.getElementById('transition-overlay');
   ov.classList.add('active');
   setTimeout(() => {
